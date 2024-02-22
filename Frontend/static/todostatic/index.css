@@ -1,0 +1,163 @@
+body{
+    background-color: rgb(220, 220, 220);
+}
+.header-body{
+    height: fit-content;
+
+
+}
+
+.header-title h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+
+}
+
+.header-signup{
+    float: right;
+}
+
+
+.header-signup .btns{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    margin-right: 40px;
+    color: #2288d6;
+    height: 45px;
+    width: 150px;
+    border-radius: 25px;
+    border:  none;
+    background-color: #fff;
+}
+
+.useracc{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: #2288d6;
+    height: 45px;
+    width: fit-content;
+    padding-left: 10px;
+
+    background-color: #fff;
+    border-radius: 25px;
+
+}
+
+.logout{
+    color: #fff;
+    height: 45px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 25px;
+    background-color: #94cdf8;
+}
+
+.content{
+
+
+    gap: 20px;
+}
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 45px;
+    font-weight: 700;
+}
+
+.add-task{
+
+    border-radius: 15px;
+
+}
+
+.add-task h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.btn-div button{
+    height: 40px;
+    width: 100%;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+}
+.btn-div .btn-cancel{
+    background-color: #8b8b8b;
+    border-radius: 10px 0 0 10px ;
+}
+.btn-div .btn-add{
+    background-color: #2288d6;
+    border-radius: 0px 10px 10px 0px ;
+}
+
+.display-task{
+    border-radius: 15px;
+}
+.display-task h2{
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.display-task.table{
+    border-radius: 15px;
+}
+
+.table a{
+    text-decoration: none;
+}
+
+.actions a{
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.actions button{
+    height: 50px;
+    width: fit-content;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.actions{
+    gap: 20px;
+}
+
+
+/* signup form */
+
+.signup-title {
+    border-radius: 15px 15px 0 0;
+}
+
+.signup-title h2 {
+    font-weight: 700;
+}
+
+.signup-title p {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.signup-div {
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+.signup-form input {
+    height: 45px;
+}
+
+.signup-form button {
+    font-weight: 700;
+    height: 45px;
+    font-size: 15px;
+}
+
+.signup-form a{
+    text-decoration: none;
+    color: #2288d6;
+    font-weight: 500;
+    margin-left: 5px;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% extends 'admin_page.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+
+<div class="col-12 col-lg-6 col-xxl-6 d-flex">
+							<div class="card flex-fill p-5">
+								<div class="card-header">
+
+
+
+									<h5 class="card-title mb-0">Assign Task</h5>
+								</div>
+                              <form method="post" action="{% url 'assign_task' %}" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                  <div class="mt-4 mb-4">
+                                      <label>Employee</label>
+                                      <select class="form-control form-control-lg" name="emp_name">
+                                          <option>Employee</option>
+                                          {% for i in data %}
+                                          <option>{{i.Name}}</option>
+                                          {% endfor %}
+                                      </select>
+                                  </div>
+                                <div class=" mb-4">
+                                    <label>Task</label>
+                                  <input class="form-control form-control-lg" type="text" placeholder="Task" name="task">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Task Description</label>
+                                    <textarea class="form-control form-control-lg" placeholder="Description" name="task_desc"></textarea>
+                                </div>
+                                <div class=" mb-4">
+                                  <label>Dead Line</label>
+                                  <input class="form-control form-control-lg" type="date" placeholder="Task" name="dead_line">
+                                </div>
+                                  <input type="hidden" value="Pending" name="status">
+                                  <div class="mb-5">
+                                      <button type="submit" class="btn btn-primary w-25" >Assign</button>
+                                  </div>
+                              </form>
+							</div>
+						</div>
+{% endblock %}
+
+	    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+        {% for i in messages %}
+            {% if i.tags == "success" %}
+                <script>
+                    swal('{{i}}', '', 'success')
+                </script>
+            {% elif i.tags == "info" %}
+                <script>
+                    swal('{{i}}', '', 'info')
+                </script>
+            {% elif i.tags == "error" %}
+                <script>
+                    swal('{{i}}', '', 'error')
+                </script>
+            {% elif i.tags == "warning" %}
+                <script>
+                    swal('{{i}}', '', 'warning')
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

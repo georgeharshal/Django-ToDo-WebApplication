@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoApp</title>
+    <link rel="stylesheet" href="{% static 'todostatic/index.css' %}">
+    <link rel="stylesheet" href="{% static 'todostatic/assests/css/all.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+
+<!--     header -->
+
+    <div class=" bg-primary p-4 d-flex">
+        <div class="header-title m-2">
+            <a href="#" style="text-decoration: none;">
+                <h3 class="text-light">ToDoApp</h3>
+            </a>
+        </div>
+
+        <div class="header-signup m-2 w-100 d-flex justify-content-end">
+
+            {% if request.session.Username %}
+            <div class="useracc d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 16px; height:16px;">
+                    <path fill="#1a84d5" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7
+                    512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                </svg>&nbsp;
+                {{request.session.Username}}&nbsp;
+                <div class="logout d-flex align-items-center">
+                    <a href="{% url 'logout' %}" class="link" style="text-decoration: none; color: #fff;">
+
+                        Logout
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <a href="{% url 'signup' %}">
+                <button class="btns ml-5">Signup / Login</button>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="">
+
+        <div class="col-12" style="padding: 15px; height: fit-content; background-color: #c3e5ff; padding-bottom: 440px;">
+
+<!--             <div class="col-12 mb-4 mt-3">-->
+<!--                <div class="d-flex">-->
+<!--                    <h1 class="text-primary ">Welcome, </h1>-->
+<!--                    <h2 class="mt-2">{{request.session.Username}}</h2>-->
+<!--                </div>-->
+<!--            </div> -->
+
+            {% if request.session.Username %}
+            <div class="col-12 p-3 mb-3  display-task ">
+                <h2 class="text-center text-dark">TASK DETAILS</h2>
+                <table class="table table-bordered">
+                    <thead class="table-dark text-center">
+                        <tr>
+
+                            <th>Task</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    {% for i in data %}
+                    <form method="post" action="{% url 'update_task' task_id=i.id %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                        <tr style="font-size: 15px; font-weight: 600;">
+
+                            <td>{{i.Task}} <input type="hidden" name="task" value="{{i.Task}}"></td>
+                            <td>{{i.TaskDescription}} </td>
+                            <td>{{i.DeadLine}} </td>
+                            <td>
+                                {% if i.Status == "Completed" %}
+                                    <button style="font-weight: 600; " class="btn btn-success">{{i.Status}}</button>
+                                {% else %}
+                                    <button style="font-weight: 600; " class="btn btn-warning">{{i.Status}}</button><input type="hidden" name="status" value="Completed">
+                                {% endif %}
+                            </td>
+                            <td>
+
+                                {% if i.Status != "Completed" %}
+
+                                    <button type="submit" style="border: none; background-color: #fff;">
+                                    <i class="fa-solid fa-circle-check fa-xl" style="color: #00ff59;"></i>
+                                    </button>
+
+                                {% endif %}
+                            </td>
+                        </tr>
+                        </form>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+<!--            <div class="co-12 col-lg-6 p-3 mx-auto mb-3 mt-5 bg-light display-task">-->
+<!--                <h1 class="text-center mt-3" style="font-family: Arial, Helvetica, sans-serif; font-weight: 700;">-->
+<!--                    SignUp or Login-->
+
+<!--                </h1>-->
+
+<!--            </div>-->
+
+        </div>
+
+    </div>
+
+    
+
+    <!-- modal / add new task -->
+
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+        {% for i in messages %}
+            {% if i.tags == "success" %}
+                <script>
+                    swal('{{i}}', '', 'success')
+                </script>
+            {% elif i.tags == "info" %}
+                <script>
+                    swal('{{i}}', '', 'info')
+                </script>
+            {% elif i.tags == "error" %}
+                <script>
+                    swal('{{i}}', '', 'error')
+                </script>
+            {% elif i.tags == "warning" %}
+                <script>
+                    swal('{{i}}', '', 'warning')
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

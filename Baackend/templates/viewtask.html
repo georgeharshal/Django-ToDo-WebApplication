@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% extends 'admin_page.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+
+<div class="col-12 col-lg-12 col-xxl-10 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">Task List</h5>
+								</div>
+								<table class="table table-hover my-0">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th >Task</th>
+											<th >Description</th>
+											<th >Dead Line</th>
+											<th >status</th>
+											<th >Action</th>
+										</tr>
+									</thead>
+									<tbody>
+
+									{% for i in data %}
+
+										<tr>
+											<td>{{i.EmployeeName}}</td>
+											<td>{{i.Task}}</td>
+											<td>{{i.TaskDescription}}</td>
+											<td>{{i.DeadLine}}</td>
+											<td >
+												{% if i.Status == "Completed" %}
+												<button class="btn btn-success" disabled>
+													{{i.Status}}
+												</button>
+												{% elif i.Status == "Pending" %}
+												<button class="btn btn-warning" disabled>
+													{{i.Status}}
+												</button>
+												{% endif %}
+											</td>
+											<td>
+												<a href="{% url 'remove_task' emp_id=i.id %}">
+													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 15px;">
+														<path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1
+														0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3
+														32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32
+														128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96
+														64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96
+														0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96
+														0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+
+								</table>
+							</div>
+						</div>
+{% endblock %}
+
+	    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+        {% for i in messages %}
+            {% if i.tags == "success" %}
+                <script>
+                    swal('{{i}}', '', 'success')
+                </script>
+            {% elif i.tags == "info" %}
+                <script>
+                    swal('{{i}}', '', 'info')
+                </script>
+            {% elif i.tags == "error" %}
+                <script>
+                    swal('{{i}}', '', 'error')
+                </script>
+            {% elif i.tags == "warning" %}
+                <script>
+                    swal('{{i}}', '', 'warning')
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

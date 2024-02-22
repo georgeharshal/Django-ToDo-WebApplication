@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% extends 'admin_page.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+
+<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">Employee List</h5>
+								</div>
+								<table class="table table-hover my-0">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th class="d-none d-xl-table-cell">Email id</th>
+											<th class="d-none d-xl-table-cell">Last Login</th>
+											<th class="d-none d-md-table-cell">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+									{% for i in data %}
+										<tr>
+											<td>{{i.Name}}</td>
+											<td class="d-none d-xl-table-cell">{{i.EmailId}}</td>
+											<td class="d-none d-xl-table-cell">{{i.LastLogin}}</td>
+											<td>
+												<a href="{% url 'view_task' emp_name=i.Name %}">
+													<button class="btn btn-primary">
+														View Tasks
+													</button>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+
+								</table>
+							</div>
+						</div>
+{% endblock %}
+
+	    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+        {% for i in messages %}
+            {% if i.tags == "success" %}
+                <script>
+                    swal('{{i}}', '', 'success')
+                </script>
+            {% elif i.tags == "info" %}
+                <script>
+                    swal('{{i}}', '', 'info')
+                </script>
+            {% elif i.tags == "error" %}
+                <script>
+                    swal('{{i}}', '', 'error')
+                </script>
+            {% elif i.tags == "warning" %}
+                <script>
+                    swal('{{i}}', '', 'warning')
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
